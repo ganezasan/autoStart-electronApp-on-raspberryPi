@@ -114,9 +114,9 @@ if command_exists plymouth; then
       sudo mkdir $THEME_DIR/$CUSTOM_THEME
     fi
 
-    if sudo cp ~/$BASE_NAME/splashscreen/splash.png $THEME_DIR/$CUSTOM_THEME/splash.png && sudo cp ~/$BASE_NAME/splashscreen/app.plymouth $THEME_DIR/$CUSTOM_THEME/app.plymouth && sudo cp ~/$BASE_NAME/splashscreen/app.script $THEME_DIR/$CUSTOM_THEME/app.script; then
+    if sudo cp ~/$BASE_NAME/splashscreen/splash.png $THEME_DIR/$CUSTOM_THEME/splash.png && sudo cp ~/$BASE_NAME/splashscreen/$CUSTOM_THEME.plymouth $THEME_DIR/$CUSTOM_THEME/$CUSTOM_THEME.plymouth && sudo cp ~/$BASE_NAME/splashscreen/$CUSTOM_THEME.script $THEME_DIR/$CUSTOM_THEME/$CUSTOM_THEME.script; then
       echo -e "\e[90mSplashscreen: Theme copied successfully.\e[0m"
-      if sudo plymouth-set-default-theme -R App; then
+      if sudo plymouth-set-default-theme -R $CUSTOM_THEME; then
         echo -e "\e[92mSplashscreen: Changed theme to sample $CUSTOM_THEME successfully.\e[0m"
       else
         echo -e "\e[91mSplashscreen: Couldn't change theme to $CUSTOM_THEME!\e[0m"
@@ -129,4 +129,10 @@ if command_exists plymouth; then
   fi
 else
   echo -e "\e[93mplymouth is not installed.\e[0m";
+fi
+
+# Enable Splash Screen
+CMDLINE = /boot/cmdline.txt
+if ! grep -q "splash" $CMDLINE ; then
+  sed -i $CMDLINE -e "s/$/ quiet splash plymouth.ignore-serial-consoles/"
 fi

@@ -5,4 +5,4 @@ ModuleName=script
 
 [script]
 ImageDir=/usr/share/plymouth/themes/SampleApp
-ScriptFile=/usr/share/plymouth/themes/SampleApp/app.script
+ScriptFile=/usr/share/plymouth/themes/SampleApp/SampleApp.script
