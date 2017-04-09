@@ -1,1 +1,1 @@
-# autoStart-electronApp-on-raspberryPi
+# AutoStart ElectronApp On RaspberryPi

@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=SampleApp
+Description=SampleApp Splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/SampleApp
+ScriptFile=/usr/share/plymouth/themes/SampleApp/app.script
