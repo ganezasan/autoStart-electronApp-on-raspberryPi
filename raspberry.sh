@@ -23,8 +23,6 @@ BASE_NAME="autoStart-electronApp-on-raspberryPi"
 CUSTOM_THEME="SampleApp"
 CMDLINE="/boot/cmdline.txt"
 
-echo "$CMDLINE"
-
 # Check the Raspberry Pi version.
 if [ "$ARM" != "armv7l" ]; then
   echo -e "\e[91mSorry, your Raspberry Pi is not supported."
