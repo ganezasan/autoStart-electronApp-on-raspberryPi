@@ -21,6 +21,7 @@ ARM=$(uname -m)
 
 BASE_NAME="autoStart-electronApp-on-raspberryPi"
 CUSTOM_THEME="SampleApp"
+CMDLINE=/boot/cmdline.txt
 
 # Check the Raspberry Pi version.
 if [ "$ARM" != "armv7l" ]; then
@@ -132,7 +133,6 @@ else
 fi
 
 # Enable Splash Screen
-CMDLINE = /boot/cmdline.txt
 if ! grep -q "splash" $CMDLINE ; then
   sed -i $CMDLINE -e "s/$/ quiet splash plymouth.ignore-serial-consoles/"
 fi
