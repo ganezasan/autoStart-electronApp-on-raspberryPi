@@ -137,3 +137,18 @@ if ! grep -q "splash" $CMDLINE ; then
   sudo sed -i $CMDLINE -e "s/$/ quiet splash plymouth.ignore-serial-consoles/"
   echo -e "\e[92mSplashscreen: Enable Splash Screen \e[0m"
 fi
+
+# Use pm2 control like a service
+read -p "Do you want use pm2 for auto starting of your App (y/n)?" choice
+if [[ $choice =~ ^[Yy]$ ]]
+then
+    sudo npm install -g pm2
+    sudo su -c "env PATH=$PATH:/usr/bin pm2 startup -u pi --hp /home/pi"
+    pm2 start ~/autoStart-electronApp-on-raspberryPi/installers/pm2.yml
+    pm2 save
+fi
+
+echo " "
+echo -e "\e[92mWe're ready! Run \e[1m\e[97mDISPLAY=:0 npm start\e[0m\e[92m from the ~/autoStart-electronApp-on-raspberryPi directory to start your App.\e[0m"
+echo " "
+echo " "
