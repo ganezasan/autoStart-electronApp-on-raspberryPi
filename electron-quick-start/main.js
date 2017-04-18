@@ -14,20 +14,17 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    height: 320,
-    width: 480,
-    movable: false,
-    resizable: false,
-    modal: false,
-    frame: false,
-    hasShadow: false,
+    width: 960,
+    height: 640,
+    x: 0,
+    y: 0,
     darkTheme: true,
     fullscreen: true,
+    frame: false,
     alwaysOnTop: true,
+    resizable: false,
     autoHideMenuBar: true
-    show: true
   });
-
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
