@@ -105,10 +105,11 @@ else
   exit;
 fi
 
-cd ~/autoStart-electronApp-on-raspberryPi  || exit
+cd ~/autoStart-electronApp-on-raspberryPi/electron-quick-start || exit
 echo -e "\e[96mInstalling dependencies ...\e[90m"
 if npm install; then
 	echo -e "\e[92mDependencies installation Done!\e[0m"
+  cd ..
 else
 	echo -e "\e[91mUnable to install dependencies!"
 	exit;
@@ -152,7 +153,7 @@ fi
 if ! grep -q "xset" $AUTOSTART ; then
   sudo sed -i $AUTOSTART -e "s/^@/#@/g"
   sudo sed -i $AUTOSTART -e '$a @xset s noblank\n@xset s off\n@xset -dpms'
-  echo -e "\e[92m Desktop: Disable desktop \e[0m"
+  echo -e "\e[92mDesktop: Disable desktop \e[0m"
 fi
 
 # Use pm2 control like a service
