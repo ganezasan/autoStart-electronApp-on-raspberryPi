@@ -1,0 +1,7 @@
+apps:
+  - script: /home/pi/autoStart-electronApp-on-raspberryPi/installers/mm.sh
+    name: 'sample-app'
+    env:
+      NODE_ENV: development
+    env_production:
+      NODE_ENV: production
