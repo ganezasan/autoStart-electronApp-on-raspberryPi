@@ -135,4 +135,5 @@ fi
 # Enable Splash Screen
 if ! grep -q "splash" $CMDLINE ; then
   sudo sed -i $CMDLINE -e "s/$/ quiet splash plymouth.ignore-serial-consoles/"
+  echo -e "\e[92mSplashscreen: Enable Splash Screen \e[0m"
 fi
