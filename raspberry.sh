@@ -22,11 +22,12 @@ ARM=$(uname -m)
 BASE_NAME="autoStart-electronApp-on-raspberryPi"
 CUSTOM_THEME="SampleApp"
 CMDLINE="/boot/cmdline.txt"
+AUTOSTART="~/.config/lxsession/LXDE-pi/autostart"
 
 # Check the Raspberry Pi version.
 if [ "$ARM" != "armv7l" ]; then
   echo -e "\e[91mSorry, your Raspberry Pi is not supported."
-  echo -e "\e[91mPlease run MagicMirror on a Raspberry Pi 2 or 3."
+  echo -e "\e[91mPlease run App on a Raspberry Pi 2 or 3."
   exit;
 fi
 
@@ -84,7 +85,7 @@ if $NODE_INSTALL; then
 fi
 
 
-# Install MagicMirror
+# Install App
 cd ~
 if [ -d "$HOME/$BASE_NAME" ] ; then
   echo -e "\e[93mIt seems like $BASE_NAME is already installed."
@@ -102,6 +103,15 @@ if git clone https://github.com/ganezasan/autoStart-electronApp-on-raspberryPi.g
 else
   echo -e "\e[91mUnable to clone $BASE_NAME."
   exit;
+fi
+
+cd ~/autoStart-electronApp-on-raspberryPi  || exit
+echo -e "\e[96mInstalling dependencies ...\e[90m"
+if npm install; then
+	echo -e "\e[92mDependencies installation Done!\e[0m"
+else
+	echo -e "\e[91mUnable to install dependencies!"
+	exit;
 fi
 
 # Check if plymouth is installed (default with PIXEL desktop environment), then install custom splashscreen.
@@ -136,6 +146,13 @@ fi
 if ! grep -q "splash" $CMDLINE ; then
   sudo sed -i $CMDLINE -e "s/$/ quiet splash plymouth.ignore-serial-consoles/"
   echo -e "\e[92mSplashscreen: Enable Splash Screen \e[0m"
+fi
+
+# disable Desktop
+if ! grep -q "xset" $AUTOSTART ; then
+  sudo sed -i $AUTOSTART -e "s/^@/#@/g"
+  sudo sed -i $AUTOSTART -e '$a @xset s noblank\n@xset s off\n@xset -dpms'
+  echo -e "\e[92m Desktop: Disable desktop \e[0m"
 fi
 
 # Use pm2 control like a service
