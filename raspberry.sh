@@ -22,7 +22,7 @@ ARM=$(uname -m)
 BASE_NAME="autoStart-electronApp-on-raspberryPi"
 CUSTOM_THEME="SampleApp"
 CMDLINE="/boot/cmdline.txt"
-AUTOSTART="~/.config/lxsession/LXDE-pi/autostart"
+AUTOSTART="/home/pi/.config/lxsession/LXDE-pi/autostart"
 
 # Check the Raspberry Pi version.
 if [ "$ARM" != "armv7l" ]; then
